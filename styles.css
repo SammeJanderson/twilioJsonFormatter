@@ -181,4 +181,232 @@ button#tpl-delete:hover {
   .row {
     flex-direction: column;
   }
+}
+
+/* ==========================================================================
+   Preview Modal
+   ========================================================================== */
+.preview-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.preview-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-content {
+  background: #e9edef;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.preview-header {
+  background: #00a884;
+  color: white;
+  padding: 1rem;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.preview-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.preview-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  opacity: 0.9;
+}
+
+.preview-close:hover {
+  opacity: 1;
+}
+
+.preview-controls {
+  padding: 1rem;
+  background: white;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.preview-controls .preview-close {
+  color: #00a884;
+  font-size: 1rem;
+  padding: 0.625rem 1.25rem;
+  background: #e9edef;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.preview-controls .preview-close:hover {
+  background: #d9dde1;
+}
+
+/* Carousel Preview */
+.carousel-preview {
+  background: #e9edef;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, "Lucida Grande", Arial, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", sans-serif;
+}
+
+.carousel-main {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+  color: #111b21;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  outline: none;
+  transition: background-color 0.2s;
+}
+
+.carousel-main:focus {
+  background: #f0f2f5;
+}
+
+.carousel-main:empty:before {
+  content: 'Type your message here...';
+  color: #667781;
+}
+
+.carousel-cards {
+  display: flex;
+  overflow-x: auto;
+  padding: 1rem;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  background: #e9edef;
+}
+
+.carousel-card {
+  flex: 0 0 280px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  scroll-snap-align: start;
+}
+
+.card-media {
+  width: 100%;
+  height: 160px;
+  background: #f0f2f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #667781;
+  font-size: 0.875rem;
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 0.75rem;
+  background: white;
+}
+
+.card-title {
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: #111b21;
+  font-size: 0.9375rem;
+  outline: none;
+}
+
+.card-title:empty:before {
+  content: 'Add title...';
+  color: #667781;
+}
+
+.card-text {
+  margin: 0 0 0.75rem;
+  color: #111b21;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  outline: none;
+}
+
+.card-text:empty:before {
+  content: 'Add card text...';
+  color: #667781;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-button {
+  flex: 1;
+  padding: 0.625rem;
+  background: #00a884;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.card-button:hover {
+  background: #008f6f;
+}
+
+#preview-save {
+  background: #00a884;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#preview-save:hover {
+  background: #008f6f;
+}
+
+[contenteditable="true"]:focus {
+  outline: 2px solid #00a884;
+  outline-offset: -2px;
+  border-radius: 4px;
 } 

@@ -56,6 +56,7 @@
 
     <!-- Action Buttons -->
     <div class="action-buttons">
+      <button id="preview" type="button">👁️ Preview</button>
       <button id="generate" type="button">🎯 Twilio JSON</button>
       <button id="generate-numbered" type="button">🔢 Numbered JSON</button>
       <button id="generate-jaiminho" type="button">🛠️ Jaiminho JSON</button>
@@ -65,6 +66,26 @@
     <!-- Output Section -->
     <h2>Output</h2>
     <textarea id="output" readonly></textarea>
+  </div>
+
+  <!-- Preview Modal -->
+  <div class="preview-modal" id="preview-modal">
+    <div class="preview-content">
+      <div class="preview-header">
+        <h2>Template Preview</h2>
+        <button class="preview-close" type="button">×</button>
+      </div>
+      <div class="preview-body">
+        <div class="carousel-preview">
+          <div class="carousel-main" id="preview-main" contenteditable="true" data-field="body"></div>
+          <div class="carousel-cards" id="preview-cards"></div>
+        </div>
+      </div>
+      <div class="preview-controls">
+        <button type="button" id="preview-save">💾 Save Changes</button>
+        <button type="button" class="preview-close">Close</button>
+      </div>
+    </div>
   </div>
 
   <!-- Custom JavaScript -->

@@ -359,4 +359,123 @@ document.getElementById('tpl-delete').onclick = () => {
 };
 
 // Initialize template library
-refreshLib(); 
+refreshLib();
+
+// ============================================================================
+// Preview Functionality
+// ============================================================================
+
+/**
+ * Shows the preview modal
+ */
+function showPreview() {
+  const { body, cards } = collectTemplate();
+  const modal = document.getElementById('preview-modal');
+  const mainContent = document.getElementById('preview-main');
+  const cardsContainer = document.getElementById('preview-cards');
+
+  // Helper function to convert escaped newlines to actual line breaks
+  function convertNewlines(text) {
+    if (!text) return '';
+    // Convert \n to <br> tags
+    return text.replace(/\\n/g, '<br>');
+  }
+
+  // Set main message
+  mainContent.innerHTML = convertNewlines(body);
+
+  // Clear and populate cards
+  cardsContainer.innerHTML = '';
+  cards.forEach((card, index) => {
+    const cardEl = document.createElement('div');
+    cardEl.className = 'carousel-card';
+    cardEl.innerHTML = `
+      ${card.media ? `
+        <div class="card-media">
+          <img src="${card.media}" alt="" onerror="this.parentElement.textContent='Image not available'">
+        </div>
+      ` : ''}
+      <div class="card-content">
+        <div class="card-title" contenteditable="true" data-field="title" data-card-index="${index}">${convertNewlines(card.title || '')}</div>
+        <div class="card-text" contenteditable="true" data-field="body" data-card-index="${index}">${convertNewlines(card.body)}</div>
+        ${card.actions.length ? `
+          <div class="card-actions">
+            ${card.actions.map((action, actionIndex) => `
+              <a href="#" class="card-button" onclick="return false" data-field="action" data-card-index="${index}" data-action-index="${actionIndex}">
+                ${convertNewlines(action.title)}
+              </a>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `;
+    cardsContainer.appendChild(cardEl);
+  });
+
+  // Show modal
+  modal.classList.add('active');
+}
+
+/**
+ * Syncs changes from preview to form
+ */
+function syncPreviewChanges() {
+  // Helper function to convert contenteditable content to text with proper line breaks
+  function getTextWithLineBreaks(element) {
+    const text = element.innerText || element.textContent;
+    return text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  }
+
+  // Sync main message
+  const mainContent = document.getElementById('preview-main');
+  document.getElementById('body').value = getTextWithLineBreaks(mainContent);
+
+  // Sync cards
+  const cards = [...document.querySelectorAll('.carousel-card')];
+  cards.forEach((card, index) => {
+    const cardBlock = document.querySelectorAll('.card-block')[index];
+    if (!cardBlock) return;
+
+    // Sync title
+    const title = card.querySelector('.card-title');
+    cardBlock.querySelector('.c-title').value = getTextWithLineBreaks(title);
+
+    // Sync body
+    const body = card.querySelector('.card-text');
+    cardBlock.querySelector('.c-body').value = getTextWithLineBreaks(body);
+
+    // Sync actions
+    const actions = card.querySelectorAll('.card-button');
+    actions.forEach((action, actionIndex) => {
+      const actionInputs = cardBlock.querySelectorAll(`.a${actionIndex + 1}-title`);
+      if (actionInputs.length) {
+        actionInputs[0].value = action.textContent;
+      }
+    });
+  });
+
+  // Generate JSON
+  show(buildTwilioJson(false));
+}
+
+/**
+ * Hides the preview modal
+ */
+function hidePreview() {
+  const modal = document.getElementById('preview-modal');
+  modal.classList.remove('active');
+}
+
+// Add event listeners for preview functionality
+document.getElementById('preview').onclick = showPreview;
+document.getElementById('preview-save').onclick = syncPreviewChanges;
+document.querySelectorAll('.preview-close').forEach(btn => {
+  btn.onclick = hidePreview;
+});
+
+// Close preview when clicking outside
+document.getElementById('preview-modal').onclick = (e) => {
+  if (e.target.id === 'preview-modal') {
+    hidePreview();
+  }
+}; 

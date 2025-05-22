@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Twilio ↔ Jaiminho Carousel Builder</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Twilio ↔ Jaiminho Carousel Builder</h1>
+
+    <!-- Template Library Section -->
+    <fieldset>
+      <legend>Template library (localStorage)</legend>
+      <div class="row">
+        <select id="tpl-list" size="4"></select>
+        <div>
+          <button id="tpl-save" type="button">💾 Save</button>
+          <button id="tpl-load" type="button">📂 Load</button>
+          <button id="tpl-delete" type="button">🗑️ Delete</button>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Meta Information Section -->
+    <fieldset>
+      <legend>Meta</legend>
+      <label for="friendly">Friendly name</label>
+      <input id="friendly" placeholder="e.g. QuintoAndar – 3-bed carousel">
+    </fieldset>
+
+    <!-- Import Section -->
+    <fieldset>
+      <legend>Import Twilio JSON</legend>
+      <textarea id="import-json" rows="6" placeholder="Paste Twilio JSON here"></textarea>
+      <button id="import-btn" type="button">🡅 Import</button>
+    </fieldset>
+
+    <!-- Main Message Section -->
+    <fieldset>
+      <legend>Main message body (supports {{placeholders}})</legend>
+      <textarea id="body" rows="6"></textarea>
+    </fieldset>
+
+    <!-- Cards Section -->
+    <section id="cards-container"></section>
+    <button id="add-card" type="button">➕ Add card</button>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button id="generate" type="button">🎯 Twilio JSON</button>
+      <button id="generate-numbered" type="button">🔢 Numbered JSON</button>
+      <button id="generate-jaiminho" type="button">🛠️ Jaiminho JSON</button>
+      <button id="download" type="button">⬇️ Download</button>
+    </div>
+
+    <!-- Output Section -->
+    <h2>Output</h2>
+    <textarea id="output" readonly></textarea>
+  </div>
+
+  <!-- Custom JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>

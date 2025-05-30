@@ -178,7 +178,7 @@ function buildTwilioJson(numbered = false) {
   });
 
   return {
-    friendlyName: friendly || undefined,
+    friendly_name: friendly || undefined,
     language: 'pt_BR',
     types: {
       'twilio/carousel': Object.assign(
@@ -227,7 +227,7 @@ function buildJaiminhoJson() {
     samples,
     contents: [{ locale: 'pt-BR', content: body }],
     cards: jCards,
-    friendlyName: friendly || undefined,
+    friendly_name: friendly || undefined,
   };
 }
 
@@ -309,7 +309,7 @@ document.getElementById('import-btn').onclick = () => {
     return;
   }
 
-  document.getElementById('friendly').value = data.friendlyName || '';
+  document.getElementById('friendly').value = data.friendly_name || '';
   document.getElementById('body').value = car.body || '';
   document.getElementById('cards-container').innerHTML = '';
   cardSeq = 0;

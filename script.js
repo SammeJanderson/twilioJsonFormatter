@@ -226,8 +226,7 @@ function buildJaiminhoJson() {
     },
     samples,
     contents: [{ locale: 'pt-BR', content: body }],
-    cards: jCards,
-    friendly_name: friendly || undefined,
+    cards: jCards
   };
 }
 
